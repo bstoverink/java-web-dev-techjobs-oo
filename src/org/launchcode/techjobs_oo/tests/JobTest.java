@@ -34,7 +34,10 @@ public class JobTest {
 
         assertTrue(test_job3 instanceof Job);
         assertEquals("Product tester", test_job3.getName());
-        assertEquals("ACME");
+        assertEquals("ACME", test_job3.getEmployer());
+        assertEquals("Desert", test_job3.getLocation());
+        assertEquals("Quality control", test_job3.getPositionType());
+        assertEquals("Persistence", test_job3.getCoreCompetency());
 
  }
 
