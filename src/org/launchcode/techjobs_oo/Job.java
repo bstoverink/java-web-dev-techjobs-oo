@@ -1,9 +1,11 @@
 package org.launchcode.techjobs_oo;
 
+import java.util.Objects;
+
 public class Job {
 
     private int id;
-    private static int nextId = 1;
+    protected static int nextId = 1;
 
     private String name;
     private Employer employer;
@@ -18,6 +20,20 @@ public class Job {
     public Job(){
         id = nextId;
         nextId ++;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Job)) return false;
+        Job job = (Job) o;
+        return id == job.id;
+                //&& Objects.equals(name, job.name) && Objects.equals(employer, job.employer) && Objects.equals(location, job.location) && Objects.equals(positionType, job.positionType) && Objects.equals(coreCompetency, job.coreCompetency);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, employer, location, positionType, coreCompetency);
     }
 
     public Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency){
