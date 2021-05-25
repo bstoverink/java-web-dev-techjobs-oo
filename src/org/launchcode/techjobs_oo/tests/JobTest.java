@@ -5,10 +5,6 @@ import org.junit.Test;
 import org.launchcode.techjobs_oo.*;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertEquals;
-
-
 
 public class JobTest {
 
@@ -39,7 +35,6 @@ public class JobTest {
         assertEquals("Desert", test_job3.getLocation().getValue());
         assertEquals("Quality control", test_job3.getPositionType().getValue());
         assertEquals("Persistence", test_job3.getCoreCompetency().getValue());
-
  }
 
  @Test
@@ -59,14 +54,16 @@ public class JobTest {
  @Test
     public void jobContainsLabelAndContentOnNewLinesForEachField() {
         String newJobString = test_job3.toString();
+        String expectedString =
+                "\n" +
+                        "ID: " + test_job3.getId() + "\n" +
+                        "Name: " + test_job3.getName() + "\n" +
+                        "Location: " + test_job3.getLocation() + "\n" +
+                        "Employer: " + test_job3.getEmployer() + "\n" +
+                        "Position Type: " + test_job3.getPositionType() + "\n" +
+                        "Core Competency: " + test_job3.getCoreCompetency() + "\n";
 
-        assertTrue(newJobString.contains(
-                "ID: " + test_job3.getId() + "\n" +
-                "Name: " + test_job3.getName() + "\n" +
-                "Location: " + test_job3.getLocation() + "\n" +
-                "Employer: " + test_job3.getEmployer() + "\n" +
-                "Position Type: " + test_job3.getPositionType() + "\n" +
-                "Core Competency: " + test_job3.getCoreCompetency() + "\n"));
+        assertEquals(expectedString, newJobString);
  }
 
     @Test
@@ -75,7 +72,4 @@ public class JobTest {
 
         assertTrue(newJobString.contains("Data not available"));
     }
-
  }
-
-
