@@ -17,26 +17,12 @@ public class Job {
     //  other five fields. The second constructor should also call the first in order to initialize
     //  the 'id' field.
 
-    public Job(){
+    public Job() {
         id = nextId;
-        nextId ++;
+        nextId++;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Job)) return false;
-        Job job = (Job) o;
-        return id == job.id;
-                //&& Objects.equals(name, job.name) && Objects.equals(employer, job.employer) && Objects.equals(location, job.location) && Objects.equals(positionType, job.positionType) && Objects.equals(coreCompetency, job.coreCompetency);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, employer, location, positionType, coreCompetency);
-    }
-
-    public Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency){
+    public Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency) {
         this();
         this.name = name;
         this.employer = employer;
@@ -44,6 +30,51 @@ public class Job {
         this.positionType = positionType;
         this.coreCompetency = coreCompetency;
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Job job = (Job) o;
+        return id == job.id;
+    }
+
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+
+    @Override
+    public String toString() {
+        if (this.getName() == null && this.getEmployer() == null && this.getLocation() == null && this.getPositionType() == null && this.getCoreCompetency() == null) {
+            return "OOPS! This job does not seem to exist.";
+        }
+        if (this.getName() == "") {
+            name = "Data not available";
+        }
+        if (this.getEmployer().equals("")) {
+            employer = new Employer("Data not available");
+        }
+        if (this.getLocation().equals("")) {
+            location = new Location("Data not available");
+        }
+        if (this.getPositionType().equals("")) {
+            positionType = new PositionType("Data not available");
+        }
+        if (this.getCoreCompetency().equals("")) {
+            coreCompetency = new CoreCompetency("Data not available");
+        }
+        return "\n" +
+                "ID " + this.getId() + "\n" +
+                "Name:" + this.getName() + "\n" +
+                "Employer:" + this.getEmployer().getValue() + "\n" +
+                "Location:" + this.getLocation().getValue() + "\n" +
+                "Position Type:" + this.getPositionType().getValue() + "\n" +
+                "Core Competency:" + this.getCoreCompetency().getValue() + "\n";
     }
 
     public String getName() {
@@ -89,9 +120,13 @@ public class Job {
     public int getId() {
         return id;
     }
-// TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
-    //  match.
 
-    // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
-    //  and id.
+
 }
+
+
+// TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
+        //  match.
+
+        // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
+        //  and id.

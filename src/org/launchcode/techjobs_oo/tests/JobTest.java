@@ -15,14 +15,15 @@ public class JobTest {
     Job test_job1;
     Job test_job2;
     Job test_job3;
+    Job test_job4;
 
     @Before
-    public void createTestJobObjects(){
+    public void createTestJobObjects() {
         test_job1 = new Job();
         test_job2 = new Job();
         test_job3 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        test_job4 = new Job("", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
     }
-
  @Test
     public void testSettingJobId() {
 
@@ -34,10 +35,10 @@ public class JobTest {
 
         assertTrue(test_job3 instanceof Job);
         assertEquals("Product tester", test_job3.getName());
-        assertEquals("ACME", test_job3.getEmployer());
-        assertEquals("Desert", test_job3.getLocation());
-        assertEquals("Quality control", test_job3.getPositionType());
-        assertEquals("Persistence", test_job3.getCoreCompetency());
+        assertEquals("ACME", test_job3.getEmployer().getValue());
+        assertEquals("Desert", test_job3.getLocation().getValue());
+        assertEquals("Quality control", test_job3.getPositionType().getValue());
+        assertEquals("Persistence", test_job3.getCoreCompetency().getValue());
 
  }
 
@@ -48,10 +49,32 @@ public class JobTest {
     }
 
  @Test
-    public void testToStringMethod() {
+    public void shouldReturnJobStringWithBlankLinesBeforeAndAfter() {
+    String newJobString = test_job3.toString();
 
-
+    assertTrue(newJobString.startsWith("\n"));
+    assertTrue(newJobString.endsWith("\n"));
  }
+
+ @Test
+    public void jobContainsLabelAndContentOnNewLinesForEachField() {
+        String newJobString = test_job3.toString();
+
+        assertTrue(newJobString.contains(
+                "ID: " + test_job3.getId() + "\n" +
+                "Name: " + test_job3.getName() + "\n" +
+                "Location: " + test_job3.getLocation() + "\n" +
+                "Employer: " + test_job3.getEmployer() + "\n" +
+                "Position Type: " + test_job3.getPositionType() + "\n" +
+                "Core Competency: " + test_job3.getCoreCompetency() + "\n"));
+ }
+
+    @Test
+    public void emptyJobFieldPrintsNotAvailable() {
+        String newJobString = test_job4.toString();
+
+        assertTrue(newJobString.contains("Data not available"));
+    }
 
  }
 
